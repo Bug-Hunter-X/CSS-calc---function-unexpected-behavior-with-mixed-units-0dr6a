@@ -1,0 +1,46 @@
+To avoid the unexpected behavior of the `calc()` function, it is recommended to separate the calculations into multiple steps or use alternative approaches such as viewport units only or using JavaScript to dynamically calculate values.
+
+For example, instead of:
+```css
+.element {
+  width: calc(50% - 20px);
+}
+```
+
+Consider using a more explicit approach, such as:
+```css
+.element {
+  width: 50%;
+  margin-right: 20px; /* Assuming right margin is desired */
+}
+```
+
+Or if you need more dynamic calculation:
+```css
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.element {
+  width: calc(50% - 20px);
+  margin: 20px; /* Add margin for symmetry */
+  border: 1px solid black;
+  box-sizing: border-box; /* Include border in width calculation */
+}
+
+/*This is a way to handle the timing issue by letting the parent render first*/
+.parent {
+  width: 100vw;
+  height: 100vh; 
+}
+
+.element-safe {
+  width: calc(50% - 20px);
+}
+```
+
+This approach ensures that the calculations are performed correctly. In some cases, avoiding the mix of units and using only `vw` or `vh` can solve the issue, but for more complex layouts, a more nuanced approach might be necessary.
