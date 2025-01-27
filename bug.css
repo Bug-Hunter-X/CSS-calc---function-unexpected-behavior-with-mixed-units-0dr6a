@@ -1,0 +1,23 @@
+The CSS property `calc()` is not working as expected when used with multiple units. For example, the following code should center an element but might not depending on the browser or other factors:
+
+```css
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100vw - 20px); /* 20px margin on each side */
+  height: calc(100vh - 40px); /* 20px margin top and bottom */
+}
+```
+
+The issue is that the `calc()` function is evaluated in a specific order, and sometimes unexpected results can occur when different units (e.g., `vw` and `px`) are mixed.
+
+Another subtle issue arises when using `calc()` with percentages and other units.
+Consider this example:
+```css
+.element {
+  width: calc(50% - 20px);
+}
+```
+
+In this case, `50%` might not calculate as `50%` of the parent container before subtracting 20px. This can happen if the parent element is not yet rendered and therefore its width isn't known.
